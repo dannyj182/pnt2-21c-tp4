@@ -3,7 +3,6 @@
     <h2>Formulario</h2>
     <hr />
     <hr />
-    <br />
 
     <vue-form :state="formState" @submit.prevent="enviar()">
 
@@ -18,7 +17,7 @@
           name="nombre"
           required
           :minlength="nombreMinLength"
-          :maxlength="nombreMaxLength"
+          nombre-max-length
           no-espacios
         />
 
@@ -29,7 +28,7 @@
           <div slot="minlength" class="alert alert-danger mt-1">
             Este campo debe poseer al menos {{ nombreMinLength }} caracteres.
           </div>
-          <div slot="maxlength" class="alert alert-danger mt-1">
+          <div slot="nombre-max-length" class="alert alert-danger mt-1">
             Este campo debe poseer máximo {{ nombreMaxLength }} caracteres.
           </div>
           <div slot="no-espacios" class="alert alert-danger mt-1">
@@ -92,7 +91,7 @@
       </validate>
       <br />
 
-      <button class="btn btn-success my-3" :disabled="formState.$invalid">
+      <button class="btn btn-outline-dark my-3" :disabled="formState.$invalid">
         Enviar
       </button>
     </vue-form>
@@ -111,7 +110,7 @@
           </tr>
         </table>
       </div>
-      <h4 v-else class="alert alert-danger text-center">No se encuentran datos</h4>
+      <h4 v-else class="alert alert-danger text-center">Acá se visualizan las personas que agregues</h4>
 
   </div>
 </template>
@@ -140,7 +139,6 @@ export default {
     },
     enviar() {
       let persona = {...this.formData}
-      console.log(persona)
       this.personas.push(persona)
       this.formData = this.getInitialData()
       this.formState._reset()
